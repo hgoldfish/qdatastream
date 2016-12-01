@@ -316,7 +316,7 @@ if __name__ == "__main__":
     d.setVersion(QDataStream.Qt_4_6)
     d.writeInt8(chr(64))
     d.writeUInt8(chr(0xee))
-    d.writeInt16(6  4)
+    d.writeInt16(64)
     d.writeUInt16(0xffee)
     d.writeInt32(0x100020)
     d.writeUInt32(0xffeeddcc)
