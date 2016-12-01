@@ -75,19 +75,19 @@ class Serializer:
 
     def write_int32(self, i):
         pattern = ">i" if self.byte_order == "big" else "<i"
-        self.buffer.write(struct.pack(pattern, i))
+        self.buffer.write(struct.pack(pattern, int(i)))
 
     def write_uint32(self, i):
         pattern = ">I" if self.byte_order == "big" else "<I"
-        self.buffer.write(struct.pack(pattern, i))
+        self.buffer.write(struct.pack(pattern, int(i)))
 
     def write_int64(self, i):
         pattern = ">q" if self.byte_order == "big" else "<q"
-        self.buffer.write(struct.pack(pattern, i))
+        self.buffer.write(struct.pack(pattern, int(i)))
 
     def write_uint64(self, i):
         pattern = ">Q" if self.byte_order == "big" else "<Q"
-        self.buffer.write(struct.pack(pattern, i))
+        self.buffer.write(struct.pack(pattern, int(i)))
 
     def write_float(self, f):
         if self.version >= Qt_4_6 and self.floatingPointPrecision == DoublePrecision:
@@ -169,6 +169,8 @@ class Deserializer:
         self.buffer = io.BytesIO(buffer)
         self.byte_order = "big"
         self.double = False
+        self.version = Qt_4_6
+        self.floatingPointPrecision = DoublePrecision
 
     def read_int8(self):
         i, = struct.unpack("b", self.buffer.read(1))
@@ -314,7 +316,7 @@ if __name__ == "__main__":
     d.setVersion(QDataStream.Qt_4_6)
     d.writeInt8(chr(64))
     d.writeUInt8(chr(0xee))
-    d.writeInt16(64)
+    d.writeInt16(6  4)
     d.writeUInt16(0xffee)
     d.writeInt32(0x100020)
     d.writeUInt32(0xffeeddcc)
